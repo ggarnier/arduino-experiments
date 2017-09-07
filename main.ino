@@ -23,16 +23,17 @@ void setup() {
 }
 
 void loop() {
-  if (millis() - lightStart >= stateDuration) {
-    lightStart = millis();
+  int now = millis();
+  if (now - lightStart >= stateDuration) {
+    lightStart = now;
     stateChange();
   }
   int reading = digitalRead(button);
   if (reading != lastButtonState) {
-    lastDebounceTime = millis();
+    lastDebounceTime = now;
   }
 
-  if ((millis() - lastDebounceTime) > debounceDelay) {
+  if ((now - lastDebounceTime) > debounceDelay) {
     if (reading != buttonState) {
       buttonState = reading;
       if (buttonState == HIGH && currentState == 0) {
