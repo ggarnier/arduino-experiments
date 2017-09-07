@@ -2,6 +2,7 @@ const int green = 12;
 const int yellow = 10;
 const int red = 7;
 const int button = 2;
+const int stateDuration = 4000;
 int buttonState;
 int lastButtonState = LOW;
 int lightStart = 0;
@@ -22,7 +23,7 @@ void setup() {
 }
 
 void loop() {
-  if (millis() - lightStart >= 3000) {
+  if (millis() - lightStart >= stateDuration) {
     lightStart = millis();
     stateChange();
   }
@@ -34,8 +35,7 @@ void loop() {
   if ((millis() - lastDebounceTime) > debounceDelay) {
     if (reading != buttonState) {
       buttonState = reading;
-      if (buttonState == HIGH) {
-        currentState = 0;
+      if (buttonState == HIGH && currentState == 0) {
         stateChange();
       }
     }
@@ -49,12 +49,12 @@ void stateChange() {
     digitalWrite(green, LOW);
     digitalWrite(yellow, HIGH);
     digitalWrite(red, LOW);
-    currentState++;
+    currentState = 1;
   } else if (currentState == 1) {
     digitalWrite(green, LOW);
     digitalWrite(yellow, LOW);
     digitalWrite(red, HIGH);
-    currentState++;
+    currentState = 2;
   } else {
     digitalWrite(green, HIGH);
     digitalWrite(yellow, LOW);
