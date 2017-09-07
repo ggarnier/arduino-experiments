@@ -1,12 +1,16 @@
-const int led = LED_BUILTIN;
+const int green = 12;
+const int yellow =10;
 
 void setup() {
-  pinMode(led, OUTPUT);
+  pinMode(green, OUTPUT);
+  pinMode(yellow, OUTPUT);
 }
 
 void loop() {
-  digitalWrite(led, HIGH);
-  delay(1000);
-  digitalWrite(led, LOW);
+  digitalWrite(green, HIGH);
+  digitalWrite(yellow, HIGH);
+  delay(3000);
+  digitalWrite(green, LOW);
+  digitalWrite(yellow, LOW);
   delay(1000);
 }
