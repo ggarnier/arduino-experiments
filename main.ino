@@ -37,6 +37,7 @@ void loop() {
     if (reading != buttonState) {
       buttonState = reading;
       if (buttonState == HIGH && currentState == 0) {
+        lightStart = now;
         stateChange();
       }
     }
